@@ -30,6 +30,12 @@ var skriver ut sitt värde nu dock, eftersom det har fått sitt värde när bloc
 console.log(z);
 
 const add = (num1, num2) => {
+  console.log(num1 == 0);
+  console.log(num2 === "0");
+  console.log(num2 === 0);
+  console.log(num1 == NaN);
+  console.log(num1 ? "truthy" : "falsy");
+
   if (
     !(num1 === null || num1 === undefined) &&
     !(num2 === null || num2 === undefined) &&
@@ -38,11 +44,6 @@ const add = (num1, num2) => {
   ) {
     return num1 + num2;
   }
-  console.log(num1 == 0);
-  console.log(num2 === "0");
-  console.log(num2 === 0);
-  console.log(num1 == NaN);
-  console.log(num1 ? "truthy" : "falsy");
 };
 
 /*
@@ -73,8 +74,8 @@ väljer sedan vilket beteende den ska utföra baserat på resultatet. Generellt 
 vara ganska simpelt, även om man tekniskt sett kan utföra flera saker med hjälp av kommatecken,
 men det blir mer passande att skriva en if-sats isåfall.
 
-Skillnaden mellan == och === är att de sistnänmda inte konverterar typen för att göra jämförelsen.
-till exempel 5 == "5" ger resultatet true, medans 5 === '5' ger false, för man jämför
+Skillnaden mellan == och === är att de sistnämnda inte konverterar typen för att göra jämförelsen.
+till exempel 5 == "5" ger resultatet true, medan 5 === '5' ger false, för man jämför
 talet 5 och strängen 5.
 
 I min tidigare if-sats så kollar jag separat så att num1 och num2 inte är null ELLER undefined
@@ -105,11 +106,14 @@ specifikt för att ta emot värden i funktionsanrop. Man kan skicka en variabel 
 
 
 värdet vi fick ut sist på num1 är 0 för även om de delar namn som num1 inom funktionen är en lokal variabel som bara lever inom funktionen
-medans utanför har vi deklarerat den som en const, vilket betyder att den är konstakt och inte kan ändra värde.
+medans utanför har vi deklarerat den som en const, vilket betyder att den är konstant och inte kan ändra värde.
 
 
 När vi gör ett funktionsanrop med t.ex "add(-5, num1)" så skickar vi dessa två som argument, funktionen add tar emot det i sina parametrar
-num1 och num2. Sen kollar den så att ingen utav dom är null eller undefined, vilket blir true eftersom dom *inte* är null eller undefined.
+num1 och num2. Sen skriver vi ut true/false i konsolen baserat på några villkor, så num1 har värdet -5 här, och -5 == 0 är false.
+num2 däremot är 0, så på raden "num2 === 0 kommer det villkoret bli true. Sedan kommer vi till ternary operatorn som skriver ut truthy, för
+inom datatypen för siffror, så alla siffror som inte är 0 räknas som truthy.
+Efter det kommer vi till if-satsen, som kollar så att ingen utav dom är null eller undefined, vilket blir true eftersom dom *inte* är null eller undefined.
 Sen kollar vi så att de är siffror, och vid det tillfället skulle num1 innehålla -5 medans num2 innehåller 0. Sen använder vi typeof, vilket kommer returnera
 "number" för vardera, och vi kollar så att det returnerade värdet stämmer med "number", vilket det gör, vilket betyder att vi har siffror och vi kan
 till sist returnera num1 + num2, vilket blir -5 + 0 = -5, och eftersom anropet ligger i console.log() så skrivs det ut -5 i konsolen.
